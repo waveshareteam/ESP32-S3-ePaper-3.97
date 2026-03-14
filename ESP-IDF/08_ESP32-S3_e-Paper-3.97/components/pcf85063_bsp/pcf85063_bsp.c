@@ -157,52 +157,57 @@ Time_data PCF85063_GetTime()
 
 void PCF85063_alarm_Time_Enabled(Time_data time)
 {
-    if(time.seconds>59)
-    {
-        time.seconds = time.seconds - 60;
-        time.minutes = time.minutes + 1;
-    }
-    if(time.minutes>59)
-    {
-        time.minutes = time.minutes - 60;
-        time.hours = time.hours + 1;
-    }
-    if(time.hours>23)
-    {
-        time.hours = time.hours - 24;
-        time.days = time.days + 1;
-    }
-    if(time.months == 1 || time.months == 3 || time.months == 5 || time.months == 7 || time.months == 8 || time.months == 10 || time.months == 12)
-    {
-        if(time.days>31)
+    while(1) {
+        if(time.seconds>59)
         {
-            time.days = time.days - 31;
+            time.seconds = time.seconds - 60;
+            time.minutes = time.minutes + 1;
         }
-    }
-    else if(time.months == 2)
-    {
-        if(time.years%4==0)
+        if(time.minutes>59)
         {
-            if(time.days>29)
+            time.minutes = time.minutes - 60;
+            time.hours = time.hours + 1;
+        }
+        if(time.hours>23)
+        {
+            time.hours = time.hours - 24;
+            time.days = time.days + 1;
+        }
+        if(time.months == 1 || time.months == 3 || time.months == 5 || time.months == 7 || time.months == 8 || time.months == 10 || time.months == 12)
+        {
+            if(time.days>31)
             {
-                time.days = time.days - 29;
+                time.days = time.days - 31;
+            }
+        }
+        else if(time.months == 2)
+        {
+            if(time.years%4==0)
+            {
+                if(time.days>29)
+                {
+                    time.days = time.days - 29;
+                }
+            }
+            else
+            {
+                if(time.days>28)
+                {
+                    time.days = time.days - 28;
+                }
             }
         }
         else
         {
-            if(time.days>28)
+            if(time.days>30)
             {
-                time.days = time.days - 28;
+                time.days = time.days - 30;
             }
         }
+        if((time.seconds<60) && (time.minutes<60) && (time.hours<24))
+            break;
     }
-    else
-    {
-        if(time.days>30)
-        {
-            time.days = time.days - 30;
-        }
-    }
+    
     // ESP_LOGE(TAG,"%d-%d-%d %d:%d:%d\r\n",time.years,time.months,time.days,time.hours,time.minutes,time.seconds);
 	PCF85063_Write_Byte(CONTROL_2_REG, PCF85063_Read_Byte(CONTROL_2_REG)|0x80);	// Alarm on
 	PCF85063_Write_Byte(DAY_ALARM_REG, DecToBcd(time.days) & 0x7F);

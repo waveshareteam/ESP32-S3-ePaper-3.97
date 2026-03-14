@@ -1,6 +1,0 @@
-{
-    "idf.portWin": "COM17",
-    "files.associations": {
-        "*.tpp": "c"
-    }
-}

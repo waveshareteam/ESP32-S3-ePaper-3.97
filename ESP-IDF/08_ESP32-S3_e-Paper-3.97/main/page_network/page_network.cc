@@ -220,6 +220,8 @@ void wifi_set_enable(bool enable)
 // Destroy WiFi STA netifWiFi configuration initialization
 void page_network_init(void)
 {
+    int button = -1;        // Key status
+    EventBits_t event_bits;  // Store the event group and wait for the result
     char wifi_str[150];
     if (!wifi_event_group) {
         wifi_event_group = xEventGroupCreate();
@@ -270,8 +272,32 @@ void page_network_init(void)
         ESP_LOGI("clock", "EPD_Sleep");
         EPD_Sleep();
         
-         // Wait for the distribution network to be completed
-        xEventGroupWaitBits(wifi_event_group, WIFI_CONFIG_DONE_BIT, pdTRUE, pdTRUE, portMAX_DELAY);
+        // // Wait for the distribution network to be completed
+        // xEventGroupWaitBits(wifi_event_group, WIFI_CONFIG_DONE_BIT, pdTRUE, pdTRUE, portMAX_DELAY);
+        // Wait for the distribution network to be completed
+        while(1){
+            event_bits = xEventGroupWaitBits(wifi_event_group, WIFI_CONFIG_DONE_BIT, pdTRUE, pdTRUE, pdMS_TO_TICKS(1000));
+            if(event_bits & WIFI_CONFIG_DONE_BIT){
+                break;
+            }
+            button = wait_key_event_and_return_code(pdMS_TO_TICKS(1000));
+            if (button == 23){
+                // Turn off WiFi
+                ESP_LOGI("wifi", "Turn off WiFi");
+                wifi_set_enable(false);
+                vTaskDelay(pdMS_TO_TICKS(1000));
+                // restart
+                ESP_LOGI("wifi", "esp restart");
+                esp_restart();
+
+                // wifi_enable = 0;
+                // ESP_LOGI("wifi", "quit");
+                // return;
+                
+            }
+        }
+         
+        
 
         ESP_LOGI("network", "The distribution network is completed. Continue with the subsequent streams...");
         return;
@@ -335,6 +361,8 @@ void page_network_init(void)
 // WiFi configuration initialization
 void page_network_init_main(void)
 {
+    int button = -1;        // Key status
+    EventBits_t event_bits;  // Store the event group and wait for the result
     char wifi_str[150];
     if (!wifi_event_group) {
         wifi_event_group = xEventGroupCreate();
@@ -387,8 +415,25 @@ void page_network_init_main(void)
         ESP_LOGI("clock", "EPD_Sleep");
         EPD_Sleep();
         
+        // // Wait for the distribution network to be completed
+        // xEventGroupWaitBits(wifi_event_group, WIFI_CONFIG_DONE_BIT, pdTRUE, pdTRUE, portMAX_DELAY);
         // Wait for the distribution network to be completed
-        xEventGroupWaitBits(wifi_event_group, WIFI_CONFIG_DONE_BIT, pdTRUE, pdTRUE, portMAX_DELAY);
+        while(1){
+            event_bits = xEventGroupWaitBits(wifi_event_group, WIFI_CONFIG_DONE_BIT, pdTRUE, pdTRUE, pdMS_TO_TICKS(1000));
+            if(event_bits & WIFI_CONFIG_DONE_BIT){
+                break;
+            }
+            button = wait_key_event_and_return_code(pdMS_TO_TICKS(1000));
+            if (button == 23){
+                // Turn off WiFi
+                ESP_LOGI("wifi", "Turn off WiFi");
+                wifi_set_enable(false);
+                vTaskDelay(pdMS_TO_TICKS(1000));
+                // restart
+                ESP_LOGI("wifi", "esp restart");
+                esp_restart();
+            }
+        }
 
         ESP_LOGI("network", "The distribution network is completed. Proceed with the subsequent processes...");
         return;
@@ -565,8 +610,8 @@ void page_handle_network_key_event()
                 time_count = 0;
             } else if (button == 7) {
                 if(!idx){
-                    wifi_set_enable(true);
                     wifi_enable = 1;
+                    wifi_set_enable(true);
                     idx = 0;
                     display_network_init();
                     ESP_LOGI("network", "WiFi is turned on.");
@@ -587,8 +632,8 @@ void page_handle_network_key_event()
                 time_count = 0;
             } else if (button == 7) {
                 if(idx == 0){
-                    wifi_set_enable(false);
                     wifi_enable = 0;
+                    wifi_set_enable(false);
                     idx = 0;
                     display_network_init();
                     ESP_LOGI("network", "The WiFi has been turned off.");

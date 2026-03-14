@@ -374,7 +374,7 @@ int wait_key_event_and_return_code(TickType_t timeout)
     // if(get_bit_button(even, 25))     return 25; // Boot Press repeatedly
     // if(get_bit_button(even, 26))     return 26; // Boot Button_Up Long press to trigger once
     // if(get_bit_button(even, 27))     return 27; // Boot Button_Up Long press to keep triggering
-    if(get_bit_button(even, 23))     return 23; // Button_Up Long press to keep triggering
+    if(get_bit_button(even, 23))     return 23; // Boot Long press to keep triggering
     return -1; // No event was detected
 }
 
