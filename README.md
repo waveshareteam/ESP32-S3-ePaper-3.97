@@ -14,3 +14,11 @@ https://docs.waveshare.net/ESP32-S3-ePaper-3.97
 Data address(English):
 https://docs.waveshare.com/ESP32-S3-ePaper-3.97
 
+## xiaozhi
+
+请访问官方源码:
+
+Please visit the official source code:
+
+https://github.com/78/xiaozhi-esp32
+

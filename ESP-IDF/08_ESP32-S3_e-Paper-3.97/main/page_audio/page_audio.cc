@@ -46,7 +46,7 @@ extern SemaphoreHandle_t rtc_mutex;
 extern uint8_t *Image_Mono;
 uint8_t *Image_Mono_audio;
 // E-ink screen sleep time (S)
-#define EPD_Sleep_Time   5
+#define EPD_Sleep_Time   60
 // Equipment shutdown time (minutes)
 #define Unattended_Time  10
 

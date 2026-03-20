@@ -29,7 +29,7 @@ extern sdmmc_card_t *card_host; // The global pointer when the SD card is initia
 extern SemaphoreHandle_t qmi8658_mutex;
 
 // E-ink screen sleep time (S)
-#define EPD_Sleep_Time   5
+#define EPD_Sleep_Time   60
 // Equipment shutdown time (minutes)
 #define Unattended_Time  10
 

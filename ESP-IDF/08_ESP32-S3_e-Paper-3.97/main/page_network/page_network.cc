@@ -26,7 +26,7 @@ static bool page_network_inited = false;
 
 #define WIFI_CONFIG_DONE_BIT BIT0
 // E-ink screen sleep time (S)
-#define EPD_Sleep_Time   5
+#define EPD_Sleep_Time   60
 // Equipment shutdown time (minutes)
 #define Unattended_Time  10
 

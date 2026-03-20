@@ -27,7 +27,7 @@
 #define Default_font FONT_SIZE_18  // default font
 
 // E-ink screen sleep time (S)
-#define EPD_Sleep_Time   5
+#define EPD_Sleep_Time   60
 // Equipment shutdown time (minutes)
 #define Unattended_Time  10
 

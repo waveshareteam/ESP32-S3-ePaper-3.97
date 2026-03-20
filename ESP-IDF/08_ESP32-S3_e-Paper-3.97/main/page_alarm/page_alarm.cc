@@ -31,7 +31,7 @@ static const char *TAG = "alarm";
 uint8_t *Image_alarm;
 
 // E-ink screen sleep time (S)
-#define EPD_Sleep_Time   5
+#define EPD_Sleep_Time   60
 // Equipment shutdown time (minutes)
 #define Unattended_Time  10
 

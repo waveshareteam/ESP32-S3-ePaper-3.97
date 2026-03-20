@@ -58,7 +58,7 @@ bool wifi_enable;
 #define HOME_PAGE_NUM   8
 
 // E-ink screen sleep time (S)
-#define EPD_Sleep_Time   5
+#define EPD_Sleep_Time   60
 // Equipment shutdown time (minutes)
 #define Unattended_Time  10
 
