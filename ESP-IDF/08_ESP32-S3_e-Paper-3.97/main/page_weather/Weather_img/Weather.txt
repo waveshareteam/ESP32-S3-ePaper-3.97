@@ -7,3 +7,4 @@
 中雨,zhongyu
 阴,yin
 扬沙,yangsha
+暴雨,baoyu
