@@ -1,0 +1,23 @@
+**/.vscode
+**/.idea
+**/build
+**/managed_components
+**/components/gen_bmgr_codes/
+**/dependencies.lock
+**/sdkconfig
+**/sdkconfig.old
+**/__pycache__/
+release-artifacts/
+release-downloads/
+release-dist/
+
+# Local AI coding agent state
+.claude/
+.cursor/
+.codex/
+.gemini/
+.windsurf/
+.continue/
+.roo/
+.cline/
+.aider*

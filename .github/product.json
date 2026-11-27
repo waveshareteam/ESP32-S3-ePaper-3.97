@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/waveshareteam/esp32-repo-template/v1/schema/product.schema.json",
+  "product": "ESP32-S3-ePaper-3.97",
+  "product_url": "https://www.waveshare.com/esp32-s3-epaper-3.97.htm",
+  "tier": 0,
+  "target": "esp32s3",
+  "esp_idf": { "versions": ["v5.5"] },
+  "arduino": {
+    "core": "3.2.0",
+    "fqbn": "esp32:esp32:esp32s3:FlashSize=16M,PSRAM=opi"
+  }
+}
